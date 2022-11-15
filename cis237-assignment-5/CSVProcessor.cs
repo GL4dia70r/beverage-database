@@ -21,7 +21,7 @@ namespace cis237_assignment_5
         */
 
         // Public method to Import the CSV
-        public bool ImportCSV(BeverageCollection beverages, string pathToCSVFile)
+        public bool ImportCSV(BeverageRepository beverages, string pathToCSVFile)
         {
             // Declare the streamreader
             StreamReader streamReader = null;
@@ -83,7 +83,7 @@ namespace cis237_assignment_5
         |----------------------------------------------------------------------
         */
 
-        private void processLine(string line, BeverageCollection beverageCollection)
+        private void processLine(string line, BeverageRepository beverageCollection)
         {
             // Declare array of parts that will contain the
             // results of splitting the read in string.

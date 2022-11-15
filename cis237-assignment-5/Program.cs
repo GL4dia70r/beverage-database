@@ -21,7 +21,7 @@ namespace cis237_assignment_5
             UserInterface userInterface = new UserInterface();
 
             // Create an instance of the BeverageCollection class
-            BeverageCollection beverageCollection = new BeverageCollection(beverageCollectionSize);
+            BeverageRepository beverageCollection = new BeverageRepository(beverageCollectionSize);
 
             // Create an instance of the CSVProcessor class
             CSVProcessor csvProcessor = new CSVProcessor();
@@ -39,18 +39,7 @@ namespace cis237_assignment_5
                 switch (choice)
                 {
                     case 1:
-                        // Load the CSV File
-                        bool success = csvProcessor.ImportCSV(beverageCollection, pathToCSVFile);
-                        if (success)
-                        {
-                            // Display Success Message
-                            userInterface.DisplayImportSuccess();
-                        }
-                        else
-                        {
-                            // Display Fail Message
-                            userInterface.DisplayImportError();
-                        }
+                        
                         break;
 
                     case 2:

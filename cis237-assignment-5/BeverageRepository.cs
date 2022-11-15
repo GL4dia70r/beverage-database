@@ -2,14 +2,14 @@
 
 namespace cis237_assignment_5
 {
-    class BeverageCollection
+    class BeverageRepository
     {
         // Private Variables
         private Beverage[] beverages;
         private int beverageLength;
 
         // Constructor. Must pass the size of the collection.
-        public BeverageCollection(int size)
+        public BeverageRepository(int size)
         {
             this.beverages = new Beverage[size];
             this.beverageLength = 0;
