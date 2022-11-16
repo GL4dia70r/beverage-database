@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using cis237_assignment_5.Models;
 
 namespace cis237_assignment_5
 {
-    class BeverageRepository
+    class BeverageRepository : IBeverageRepository
     {
         // Private Variables
+        private BeverageContext context;
         private Beverage[] beverages;
         private int beverageLength;
 
@@ -16,7 +21,7 @@ namespace cis237_assignment_5
         }
 
         // Add a new item to the collection
-        public void AddNewItem(
+        public void AddNew(
             string id,
             string name,
             string pack,
@@ -27,6 +32,61 @@ namespace cis237_assignment_5
             // Add a new Beverage to the collection. Increase the Length variable.
             beverages[beverageLength] = new Beverage(id, name, pack, price, active);
             beverageLength++;
+            //newBeverages.Id = id;
+            //newBeverages.Name = name;
+            //newBeverages.Pack = pack;
+            //newBeverages.Price = price;
+            //newBeverages.Active = active;
+
+            //try
+            //{
+            //    context.Beverages.Add(newBeverages);
+
+            //    context.SaveChanges();
+            //}
+            //catch (DbUpdateException e)
+            //{
+            //    context.Beverages.Remove(newBeverages);
+
+            //    Console.WriteLine("Unable to add the recording... \n May already exist in current list.");
+            //}
+        }
+
+        public void Update(
+            string id,
+            string name,
+            string pack,
+            decimal price,
+            bool active
+        )
+        {
+            beverages[beverageLength] = context.Beverages.Find(id);
+
+            foreach (Beverage beverage in beverages)
+            {
+                if (beverage.Id == id)
+                {
+                    beverage.Id = id;
+                    beverage.Name = name;
+                    beverage.Pack = pack;
+                    beverage.Price = price;
+                    beverage.Active = active;
+
+                    context.SaveChanges();
+                }
+                else
+                {
+                    Console.WriteLine("ID does not exist...");
+                }
+            }
+
+
+
+        }
+
+        public void Delete()
+        {
+
         }
 
         // ToString override method to convert the collection to a string
@@ -49,7 +109,7 @@ namespace cis237_assignment_5
         }
 
         // Find an item by it's Id
-        public string FindById(string id)
+        public string Find(string id)
         {
             // Declare return string for the possible found item
             string returnString = null;
