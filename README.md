@@ -84,4 +84,4 @@ None
 
 ## Known Problems, Issues, And/Or Errors in the Program
 
-Overthinking the 'Find' method.
+Overthinking the 'Find' method, but made it work with help.

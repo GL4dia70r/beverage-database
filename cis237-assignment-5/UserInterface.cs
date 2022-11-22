@@ -62,7 +62,7 @@ namespace cis237_assignment_5
         public string GetSearchQuery()
         {
             Console.WriteLine();
-            Console.WriteLine("What item would you like to search for? (ID only)");
+            Console.WriteLine("What item (ID) would you like to search for?");
             Console.Write("> ");
             return Console.ReadLine();
         }
@@ -70,7 +70,7 @@ namespace cis237_assignment_5
         public string GetDeleteSearchQuery()
         {
             Console.WriteLine();
-            Console.WriteLine("What would you like to Delete? (ID only)");
+            Console.WriteLine("What item (ID) would you like to Delete?");
             Console.Write("> ");
             return Console.ReadLine();
         }
@@ -99,106 +99,54 @@ namespace cis237_assignment_5
             return new string[] { id, name, pack, price, active };
         }
 
-        // Display Import Success
-        public void DisplayImportSuccess()
-        {
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Wine List Has Been Imported Successfully");
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine();
-        }
-
-        // Display Import Error
-        public void DisplayImportError()
-        {
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("There was an error importing the CSV");
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine();
-        }
-
-        // Display All Items
-        public void DisplayAllItems(string allItemsOutput)
-        {
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine(allItemsOutput);
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine();
-        }
-
-        // Display All Items Error
-        public void DisplayAllItemsError()
-        {
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("There are no items in the list to print");
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine();
-        }
-
         // Display Item Found Success
         public void DisplayItemFound(string itemInformation)
         {
-            Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Item Found!");
+            Console.WriteLine(Environment.NewLine + "Item Found!");
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine(itemInformation);
+            Console.WriteLine(itemInformation + Environment.NewLine);
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine();
             
         }
 
         // Display Item Found Error
         public void DisplayItemFoundError()
         {
-            Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("A Match was not found");
+            Console.WriteLine(Environment.NewLine + "A Match was not found" + Environment.NewLine);
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine();
         }
 
         // Display Add Wine Item Success
         public void DisplayAddWineItemSuccess()
         {
-            Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("The Item was successfully added");
+            Console.WriteLine(Environment.NewLine + "The Item was successfully added" + Environment.NewLine);
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine();
         }
 
         public void DisplayUpdateItemSuccess()
         {
-            Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("The Item was successfully updated");
+            Console.WriteLine(Environment.NewLine + "The Item was successfully updated" + Environment.NewLine);
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine();
         }
 
         public void DisplayUpdateItemError()
         {
-            Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("The Item was not successfully updated");
+            Console.WriteLine(Environment.NewLine + "The Item was not successfully updated" + Environment.NewLine);
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine();
         }
 
         // Display Item Already Exists Error
         public void DisplayItemAlreadyExistsError()
         {
-            Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("An Item With That Id Already Exists");
+            Console.WriteLine(Environment.NewLine + "An Item With That Id Already Exists" + Environment.NewLine);
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine();
         }
 
         /*
@@ -210,7 +158,6 @@ namespace cis237_assignment_5
         // Display the Menu
         private void DisplayMenu()
         {
-            Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("What would you like to do?");
             Console.ForegroundColor = ConsoleColor.Gray;
@@ -222,7 +169,6 @@ namespace cis237_assignment_5
             Console.WriteLine("5. Delete Item From The List        |");
             Console.WriteLine("6. Exit Program                     |");
             Console.WriteLine("------------------------------------+");
-            Console.WriteLine();
         }
 
         // Display the Prompt
@@ -231,15 +177,17 @@ namespace cis237_assignment_5
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.Write("Enter Your Choice: ");
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine();
         }
 
         // Display the Error Message
         private void DisplayErrorMessage()
         {
-            Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("That is not a valid option. Please make a valid choice");
+            Console.WriteLine(
+                Environment.NewLine + 
+                "That is not a valid option. Please make a valid choice" + 
+                Environment.NewLine
+                );
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 
@@ -295,7 +243,7 @@ namespace cis237_assignment_5
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("You must provide a value.");
+                    Console.WriteLine("You must provide a(n) {0}.", fieldName);
                     Console.ForegroundColor = ConsoleColor.Gray;
                     Console.WriteLine();
                     Console.WriteLine("What is the new Item's {0}", fieldName);
@@ -321,7 +269,7 @@ namespace cis237_assignment_5
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("You must provide a value.");
+                    Console.WriteLine("You must provide a {0}.", fieldName);
                     Console.ForegroundColor = ConsoleColor.Gray;
                     Console.WriteLine();
                     Console.WriteLine("What is the new Item's {0}", fieldName);
@@ -348,7 +296,7 @@ namespace cis237_assignment_5
                 catch (Exception)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("That is not a valid Decimal. Please enter a valid Decimal.");
+                    Console.WriteLine("That is not a valid {0}. Please enter a valid {0}.", fieldName);
                     Console.ForegroundColor = ConsoleColor.Gray;
                     Console.WriteLine();
                     Console.WriteLine("What is the new Item's {0}", fieldName);
@@ -375,7 +323,7 @@ namespace cis237_assignment_5
                 catch (Exception)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("That is not a valid Decimal. Please enter a valid Decimal.");
+                    Console.WriteLine("That is not a valid {0}. Please enter a valid {0}.", fieldName);
                     Console.ForegroundColor = ConsoleColor.Gray;
                     Console.WriteLine();
                     Console.WriteLine("What is the new Item's {0}", fieldName);

@@ -21,8 +21,6 @@ namespace cis237_assignment_5
             // Create an instance of the UserInterface class
             UserInterface userInterface = new UserInterface();
 
-            BeverageContext drinkContext = new BeverageContext();
-
             // Create an instance of the BeverageCollection class
             BeverageRepository repositoryCollection = new BeverageRepository();
 
@@ -42,27 +40,13 @@ namespace cis237_assignment_5
                         // Print Entire List Of Items
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("Printing List");
-                        foreach (Beverage drink in drinkContext.Beverages)
-                        {
-                            if (!String.IsNullOrWhiteSpace(repositoryCollection.DrinkToString(drink)))
-                            {
-                                // Display all of the items
-                                userInterface.DisplayAllItems(repositoryCollection.DrinkToString(drink));
-                                Console.WriteLine("-------------------------------");
-                                Console.ForegroundColor = ConsoleColor.Gray;
-                            }
-                            else
-                            {
-                                // Display error message for all items
-                                userInterface.DisplayAllItemsError();
-                            }
-                        }
+                        repositoryCollection.PrintList();
                         break;
 
                     case 2:
                         // Search For An Item
                         string searchQuery = userInterface.GetSearchQuery();
-                        Beverage itemToFind = drinkContext.Beverages.Find(searchQuery);
+                        Beverage itemToFind = repositoryCollection.Find(searchQuery);
                         if (itemToFind != null)
                         {
                             userInterface.DisplayItemFound(repositoryCollection.DrinkToString(itemToFind));
@@ -76,7 +60,7 @@ namespace cis237_assignment_5
                     case 3:
                         // Add A New Item To The List
                         string[] newItemInformation = userInterface.GetNewItemInformation();
-                        if (drinkContext.Beverages.Find(newItemInformation[0]) == null)
+                        if (repositoryCollection.Find(newItemInformation[0]) == null)
                         {
                             repositoryCollection.AddNew(
                                 newItemInformation[0],
@@ -84,7 +68,7 @@ namespace cis237_assignment_5
                                 newItemInformation[2],
                                 decimal.Parse(newItemInformation[3]),
                                 (newItemInformation[4] == "True")
-                            );
+                        );
 
                             userInterface.DisplayAddWineItemSuccess();
                         }
@@ -98,9 +82,26 @@ namespace cis237_assignment_5
                         // Update A Item To The List
                         string searchIdQuery = userInterface.GetSearchQuery();
 
-                        Beverage itemUpdate = drinkContext.Beverages.Where(drink => drink.Id == searchIdQuery).First();
+                        Beverage itemUpdate = repositoryCollection.Find(searchIdQuery);
 
-                        userInterface.DisplayItemFound(repositoryCollection.DrinkToString(itemUpdate));
+                        if (itemUpdate != null)
+                        {
+                            userInterface.DisplayItemFound(repositoryCollection.DrinkToString(itemUpdate));
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine(
+                                Environment.NewLine + 
+                                "The item you are looking for either doesn't exist or entry was blank..." + 
+                                Environment.NewLine +
+                                Environment.NewLine +
+                                "Please enter a valid ID to update (try printing list first)." +
+                                Environment.NewLine
+                        );
+                            Console.ForegroundColor = ConsoleColor.Gray;
+                            break;
+                        }
 
                         string[] updateInformation = userInterface.UpdateItemInformation();
 
@@ -112,7 +113,7 @@ namespace cis237_assignment_5
                                 updateInformation[2],
                                 decimal.Parse(updateInformation[3]),
                                 (updateInformation[4] == "True")
-                                );
+                        );
 
                             userInterface.DisplayUpdateItemSuccess();
                         }
@@ -123,7 +124,7 @@ namespace cis237_assignment_5
                         break;
 
                     case 5:
-                        // Delete A Item From The List
+                        // Delete An Item From The List
                         string searchIdToDelete = userInterface.GetDeleteSearchQuery();
                         if (searchIdToDelete != null)
                         {

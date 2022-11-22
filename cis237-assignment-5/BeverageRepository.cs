@@ -6,6 +6,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using cis237_assignment_5.Models;
+using System.IO;
 
 namespace cis237_assignment_5
 {
@@ -43,10 +44,18 @@ namespace cis237_assignment_5
             {
                 context.Beverages.Remove(beverages);
 
-                Console.WriteLine("Unable to add the record. Primary key may already be in use." + e);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(
+                    Environment.NewLine + 
+                    "Unable to add the record. Primary key may already be in use." + 
+                    Environment.NewLine +
+                    e
+            );
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
         }
 
+        // Updates current item in the collection
         public void Update(
             string id,
             string name,
@@ -73,18 +82,30 @@ namespace cis237_assignment_5
                 }
                 catch (DbUpdateException e)
                 {
-                    Console.WriteLine("Could not update.." +
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(
+                        Environment.NewLine + 
+                        "Could not update.." +
                         Environment.NewLine +
-                        e);
+                        e
+                );
+                    Console.ForegroundColor = ConsoleColor.Gray;
                 }
             }
             else
             {
-                Console.WriteLine("ID does not exist...");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(
+                    Environment.NewLine + 
+                    "ID does not exist..." + 
+                    Environment.NewLine
+            );
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
 
         }
 
+        // Deletes item from the current collection
         public void Delete(string id)
         {
             Beverage _drinkToDelete = context.Beverages.Find(id);
@@ -97,36 +118,88 @@ namespace cis237_assignment_5
 
                     context.SaveChanges();
 
-                    Console.WriteLine();
-                    Console.WriteLine();
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("The drink was deleted from the database.");
+                    Console.WriteLine(
+                        Environment.NewLine + 
+                        "The drink was deleted from the database." + 
+                        Environment.NewLine
+                );
                     Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.WriteLine();
                 }
                 catch (DbUpdateException e)
                 {
-                    Console.WriteLine();
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(
+                        Environment.NewLine +
                         "Unforturnatley, the item could not be deleted..." +
-                        Environment.NewLine + e.Message);
+                        Environment.NewLine + e.Message
+                );
                     Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.WriteLine();
                 }
             }
             else
             {
-                Console.WriteLine();
-                Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("The item does not exist in the current list...");
+                Console.WriteLine(
+                    Environment.NewLine + 
+                    "The item either does not exist in the current list or entry was blank..." +
+                    Environment.NewLine +
+                    Environment.NewLine +
+                    "Please enter a valid ID to update (try printing list first)." +
+                    Environment.NewLine
+            );
                 Console.ForegroundColor = ConsoleColor.Gray;
-                Console.WriteLine();
+            }
+        }
+
+        // Prints collection
+        public void PrintList()
+        {
+            foreach (Beverage drink in context.Beverages)
+            {
+                if (!String.IsNullOrWhiteSpace(DrinkToString(drink)))
+                {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    // Display all of the items
+                    Console.WriteLine(DrinkToString(drink));
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.WriteLine("--------------------------------------------------+" + Environment.NewLine);
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                }
+                else
+                {
+                    // Display error message for all items
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(
+                        Environment.NewLine + 
+                        "There are no items to print..." + 
+                        Environment.NewLine
+                );
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                }
             }
         }
 
         // ToString override method to convert the collection to a string
+        public override string ToString()
+        {
+            // Declare a return string
+            string returnString = "";
+
+            // Loop through all of the beverages
+            foreach (Beverage beverage in context.Beverages)
+            {
+                // If the current beverage is not null, concat it to the return string
+                if (beverage != null)
+                {
+                    returnString += beverage.ToString() + Environment.NewLine;
+                }
+            }
+            // Return the return string
+            return returnString;
+        }
+
+        // Returns beverages in string format
         public string DrinkToString(Beverage drink)
         {
             return      $"ID: {drink.Id}" +
@@ -146,9 +219,11 @@ namespace cis237_assignment_5
         }
 
         // Find an item by it's Id
-        public void Find(string fieldname) // Not used, overthinking this one for some reason...
+        public Beverage Find(string id) // Not used, overthinking this one for some reason...
         {
-            context.Beverages.Find(fieldname);
+            Beverage drinkId = context.Beverages.Find(id);
+
+            return drinkId;
         }
     }
 }

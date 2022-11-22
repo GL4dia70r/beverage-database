@@ -32,6 +32,6 @@ namespace cis237_assignment_5
 
         string DrinkToString(Beverage beverage);
 
-        void Find(string name);
+        Beverage Find(string name);
     }
 }
