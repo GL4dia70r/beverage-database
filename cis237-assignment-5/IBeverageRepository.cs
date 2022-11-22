@@ -1,4 +1,8 @@
-﻿using System;
+﻿// David Allen
+// 11/15/2022 - 11/21/2022
+// Assignment 5: Databases
+using cis237_assignment_5.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,9 +28,9 @@ namespace cis237_assignment_5
             bool active
             );
 
-        void Delete();
+        void Delete(string name);
 
-        string ToString();
+        string DrinkToString(Beverage beverage);
 
         string Find(string name);
     }

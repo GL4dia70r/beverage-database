@@ -1,4 +1,7 @@
-﻿using System;
+﻿// David Allen
+// 11/15/2022 - 11/21/2022
+// Assignment 5: Databases
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;

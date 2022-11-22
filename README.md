@@ -51,7 +51,7 @@ DatabaseName: Beverage + FirstInitial + LastName
 
 Solution Requirements:
 
-* 4 classes (Main, Beverage (EF Version), BeverageContext (EF Version), BeverageCollection (Though you may rename), and UserInterface. The names can differ, and might due to database names and EF setup. If you aren't sure, ask.
+* 5 classes (Main, Beverage (EF Version), BeverageContext (EF Version), BeverageCollection (Though you may rename), and UserInterface. The names can differ, and might due to database names and EF setup. If you aren't sure, ask.
 * EntityFramework Model and Collection
 * Repurposed BeverageCollection
 * Read functionality
@@ -80,8 +80,8 @@ Solution Requirements:
 
 ## Outside Resources Used
 
-
+None
 
 ## Known Problems, Issues, And/Or Errors in the Program
 
-
+None
