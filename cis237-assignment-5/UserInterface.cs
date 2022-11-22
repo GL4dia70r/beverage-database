@@ -1,6 +1,7 @@
 ﻿// David Allen
 // 11/15/2022 - 11/21/2022
 // Assignment 5: Databases
+using cis237_assignment_5.Models;
 using System;
 
 namespace cis237_assignment_5
@@ -8,7 +9,7 @@ namespace cis237_assignment_5
     class UserInterface
     {
         const int MAX_MENU_CHOICES = 6;
-
+        private BeverageContext _context;
         /*
         |----------------------------------------------------------------------
         | Public Methods
@@ -61,7 +62,15 @@ namespace cis237_assignment_5
         public string GetSearchQuery()
         {
             Console.WriteLine();
-            Console.WriteLine("What would you like to search for?");
+            Console.WriteLine("What item would you like to search for? (ID only)");
+            Console.Write("> ");
+            return Console.ReadLine();
+        }
+
+        public string GetDeleteSearchQuery()
+        {
+            Console.WriteLine();
+            Console.WriteLine("What would you like to Delete? (ID only)");
             Console.Write("> ");
             return Console.ReadLine();
         }
@@ -114,10 +123,7 @@ namespace cis237_assignment_5
         public void DisplayAllItems(string allItemsOutput)
         {
             Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Printing List");
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine(allItemsOutput);
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine();

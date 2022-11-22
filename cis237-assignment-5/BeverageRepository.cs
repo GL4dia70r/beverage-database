@@ -87,13 +87,22 @@ namespace cis237_assignment_5
 
         public void Delete(string id)
         {
-            Beverage _drinkToDelete = context.Beverages.Find(id);
+            Beverage _drinkToDelete = context.Beverages.Where(drink => drink.Id == id).First();
 
             if (_drinkToDelete != null)
             {
                 try
                 {
                     context.Beverages.Remove(_drinkToDelete);
+
+                    context.SaveChanges();
+
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("The drink was deleted from the database.");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.WriteLine();
                 }
                 catch (DbUpdateException e)
                 {
@@ -102,17 +111,6 @@ namespace cis237_assignment_5
                     Console.WriteLine(
                         "Unforturnatley, the item could not be deleted..." +
                         Environment.NewLine + e.Message);
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.WriteLine();
-                }
-                finally
-                {
-                    context.SaveChanges();
-
-                    Console.WriteLine();
-                    Console.WriteLine();
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("The drink was deleted from the database.");
                     Console.ForegroundColor = ConsoleColor.Gray;
                     Console.WriteLine();
                 }
@@ -131,7 +129,7 @@ namespace cis237_assignment_5
         // ToString override method to convert the collection to a string
         public string DrinkToString(Beverage drink)
         {
-            return $"ID: {drink.Id,-6}" +
+            return      $"ID: {drink.Id}" +
                         Environment.NewLine +
 
                         $"NAME: {drink.Name}" +
@@ -150,7 +148,13 @@ namespace cis237_assignment_5
         // Find an item by it's Id
         public string Find(string fieldname)
         {
-            return context.Beverages.Find(fieldname).ToString();
+            Beverage drink = context.Beverages.Find(fieldname); 
+
+            if (drink != null)
+            {
+                fieldname = drink.Id;
+            }
+            return fieldname;
         }
     }
 }

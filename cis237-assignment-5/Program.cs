@@ -12,10 +12,10 @@ namespace cis237_assignment_5
     class Program
     {
         static void Main(string[] args)
-        {
+        { 
             // Set Console Window Size
             Console.BufferHeight = Int16.MaxValue - 1;
-            Console.WindowHeight = 140;
+            Console.WindowHeight = 50;
             Console.WindowWidth = 120;
 
             // Create an instance of the UserInterface class
@@ -40,11 +40,12 @@ namespace cis237_assignment_5
                 {
                     case 1:
                         // Print Entire List Of Items
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Printing List");
                         foreach (Beverage drink in drinkContext.Beverages)
                         {
                             if (!String.IsNullOrWhiteSpace(repositoryCollection.DrinkToString(drink)))
                             {
-                                Console.ForegroundColor = ConsoleColor.Green;
                                 // Display all of the items
                                 userInterface.DisplayAllItems(repositoryCollection.DrinkToString(drink));
                                 Console.WriteLine("-------------------------------");
@@ -124,8 +125,7 @@ namespace cis237_assignment_5
 
                     case 5:
                         // Delete A Item From The List
-                        string searchIdToDelete = userInterface.GetSearchQuery();
-                        Beverage itemToDelete = drinkContext.Beverages.Find(searchIdToDelete);
+                        string searchIdToDelete = userInterface.GetDeleteSearchQuery();
                         if (searchIdToDelete != null)
                         {
                             repositoryCollection.Delete(searchIdToDelete);
