@@ -85,6 +85,7 @@ namespace cis237_assignment_5
                                 decimal.Parse(newItemInformation[3]),
                                 (newItemInformation[4] == "True")
                             );
+
                             userInterface.DisplayAddWineItemSuccess();
                         }
                         else
@@ -114,12 +115,10 @@ namespace cis237_assignment_5
                                 );
 
                             userInterface.DisplayUpdateItemSuccess();
-                            Console.WriteLine();
                         }
                         else
                         {
                             userInterface.DisplayUpdateItemError();
-                            Console.WriteLine();
                         }
                         break;
 
@@ -129,13 +128,11 @@ namespace cis237_assignment_5
                         if (searchIdToDelete != null)
                         {
                             repositoryCollection.Delete(searchIdToDelete);
-                            Console.WriteLine();
                         }
                         break;
                 }
                 // Get the new choice of what to do from the user
                 choice = userInterface.DisplayMenuAndGetResponse();
-                Console.WriteLine();
             }
         }
     }

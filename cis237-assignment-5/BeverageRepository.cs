@@ -87,7 +87,7 @@ namespace cis237_assignment_5
 
         public void Delete(string id)
         {
-            Beverage _drinkToDelete = context.Beverages.Where(drink => drink.Id == id).First();
+            Beverage _drinkToDelete = context.Beverages.Find(id);
 
             if (_drinkToDelete != null)
             {
@@ -146,15 +146,9 @@ namespace cis237_assignment_5
         }
 
         // Find an item by it's Id
-        public string Find(string fieldname)
+        public void Find(string fieldname) // Not used, overthinking this one for some reason...
         {
-            Beverage drink = context.Beverages.Find(fieldname); 
-
-            if (drink != null)
-            {
-                fieldname = drink.Id;
-            }
-            return fieldname;
+            context.Beverages.Find(fieldname);
         }
     }
 }
